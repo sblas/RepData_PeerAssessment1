@@ -38,7 +38,13 @@ Formate the date column to be of a date format
 ```r
 # load timeDate package
         library(timeDate)
+```
 
+```
+## Warning: package 'timeDate' was built under R version 3.1.1
+```
+
+```r
 # Create a new column called "day" that contains the days of the week to the dataset with imputed data 
         data$date <- as.Date(data$date,format="%Y-%m-%d")
 ```
@@ -60,7 +66,9 @@ A histogram of the total number of steps taken each day can be created to visual
         histdata <- ddply(data[complete.cases(data),],.(date), summarise, total = sum(steps))
 
 # Create histogram
-        hist(histdata$total,col="slategray", main="Total Number of Steps Taken Each Day", xlab="Total Number of Steps")
+        hist(histdata$total,col="slategray", 
+             main="Total Number of Steps Taken Each Day", 
+             xlab="Total Number of Steps")
 ```
 
 ![plot of chunk histosteps](figure/histosteps.png) 
@@ -74,9 +82,27 @@ The actual mean and median total number of steps taken per day can be calcluated
 # Calculate the mean total nubmer of steps by date for complete cases (no NAs)
         meandata <- mean(histdata$total)
 
+# Print mean
+        print(meandata)
+```
+
+```
+## [1] 10766
+```
+
+```r
 # Calculate the median total nubmer of steps by date for complete cases (no NAs)
         mediandata <- median(histdata$total)
+
+# Print median
+
+        print(mediandata)
 ```
+
+```
+## [1] 10765
+```
+
 
 The calculated mean number of steps taken per day is 1.0766 &times; 10<sup>4</sup> steps.  And the calculated median total number of steps taken per day is 10765 steps.
 
@@ -95,7 +121,10 @@ A time series plot of the 5-minute interval and the average number of steps take
         timedata <- ddply(data[complete.cases(data),],.(interval), summarise, avg = mean(steps))
 
 # Create time series plot
-        plot(x=timedata$interval,y=timedata$avg,type="l", main="Average Number of Steps Taken per 5-minute Interval\n(averaged across all days)", ylab="Average Number of Steps", xlab="5-minute Interval")
+        plot(x=timedata$interval,y=timedata$avg,type="l", 
+             main="Average Number of Steps Taken per 5-minute Interval\n(averaged across all days)", 
+             ylab="Average Number of Steps", 
+             xlab="5-minute Interval")
 ```
 
 ![plot of chunk timeseries](figure/timeseries.png) 
@@ -107,8 +136,15 @@ The actual 5-minute interval, on average across all the days in the dataset, tha
 
 
 ```r
-# Calculate the maximum nubmer of steps for 5-minute intervals for complete cases (no NAs)
+# Calculate the maximum number of steps for 5-minute intervals for complete cases (no NAs)
         maxsteps <- timedata[timedata$avg == max(timedata$avg),1]
+
+# Print maximum steps
+        print(maxsteps)
+```
+
+```
+## [1] 835
 ```
 
 Therefore, The 835th 5-minute interval, on average across all the days in the dataset for complete cases, contains the maximum number of steps.

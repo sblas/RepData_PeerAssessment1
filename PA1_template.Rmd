@@ -59,7 +59,9 @@ A histogram of the total number of steps taken each day can be created to visual
         histdata <- ddply(data[complete.cases(data),],.(date), summarise, total = sum(steps))
 
 # Create histogram
-        hist(histdata$total,col="slategray", main="Total Number of Steps Taken Each Day", xlab="Total Number of Steps")
+        hist(histdata$total,col="slategray", 
+             main="Total Number of Steps Taken Each Day", 
+             xlab="Total Number of Steps")
 
 ```
 
@@ -72,11 +74,18 @@ The actual mean and median total number of steps taken per day can be calcluated
 # Calculate the mean total nubmer of steps by date for complete cases (no NAs)
         meandata <- mean(histdata$total)
 
+# Print mean
+        print(meandata)
+
 # Calculate the median total nubmer of steps by date for complete cases (no NAs)
         mediandata <- median(histdata$total)
 
+# Print median
+
+        print(mediandata)
 
 ```
+
 
 The calculated mean number of steps taken per day is `r meandata` steps.  And the calculated median total number of steps taken per day is `r mediandata` steps.
 
@@ -94,7 +103,10 @@ A time series plot of the 5-minute interval and the average number of steps take
         timedata <- ddply(data[complete.cases(data),],.(interval), summarise, avg = mean(steps))
 
 # Create time series plot
-        plot(x=timedata$interval,y=timedata$avg,type="l", main="Average Number of Steps Taken per 5-minute Interval\n(averaged across all days)", ylab="Average Number of Steps", xlab="5-minute Interval")
+        plot(x=timedata$interval,y=timedata$avg,type="l", 
+             main="Average Number of Steps Taken per 5-minute Interval\n(averaged across all days)", 
+             ylab="Average Number of Steps", 
+             xlab="5-minute Interval")
 
 ```
 
@@ -105,8 +117,11 @@ The actual 5-minute interval, on average across all the days in the dataset, tha
 
 ```{r averagemax, echo=TRUE}
 
-# Calculate the maximum nubmer of steps for 5-minute intervals for complete cases (no NAs)
+# Calculate the maximum number of steps for 5-minute intervals for complete cases (no NAs)
         maxsteps <- timedata[timedata$avg == max(timedata$avg),1]
+
+# Print maximum steps
+        print(maxsteps)
 
 ```
 
